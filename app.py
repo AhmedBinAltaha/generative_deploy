@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
+import os
 
 # Load model and tokenizer
 def load_model(model_path):
@@ -47,4 +48,5 @@ def generate_text():
     return jsonify({"generated_text": text})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5002)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
